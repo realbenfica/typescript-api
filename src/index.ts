@@ -28,7 +28,7 @@ const app = createKoaServer({
 
 setupDb()
   .then(_ =>
-    app.listen(port, () => console.log('Listening on port 4000'))
+    app.listen(port, () => console.log(`Listening on port ${port}`))
   )
   .catch(err => console.error(err))
 
