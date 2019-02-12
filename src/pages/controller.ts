@@ -1,20 +1,9 @@
-import { JsonController, Get, Param, Put, Body, Post, HttpCode } from 'routing-controllers'
-// import pagesById, { Page } from './data'
+import { JsonController, Get, Param, Put, Body, Post, HttpCode, Authorized } from 'routing-controllers'
 import Page from './entity'
 import { NotFoundError } from 'routing-controllers'
 
-
-// type PageList = { pages: Page[] }
-
 @JsonController()
 export default class PageController {
-
-    // @Get('/pages/:id')
-    // getPage(
-    //     @Param('id') id: number
-    // ): Page {
-    //     return pagesById[id]
-    // }
 
     @Get('/pages/:id')
     getPage(
@@ -23,25 +12,11 @@ export default class PageController {
         return Page.findOne(id)
     }
 
-    // @Get('/pages/')
-    // allPages(): PageList {
-    //     return { pages: Object.values(Page.findOne) }
-    // }
-
     @Get('/pages')
     async allPages() {
         const pages = await Page.find()
         return { pages }
     }
-
-    // @Put('/pages/:id')
-    // updatePage(
-    //     @Param('id') id: number,
-    //     @Body() body: Partial<Page>
-    // ): Page {
-    //     console.log(`Incoming PUT body param:`, body)
-    //     return Page.findOne[id]
-    // }
 
     @Put('/pages/:id')
     async updatePage(
@@ -54,15 +29,7 @@ export default class PageController {
         return Page.merge(page, update).save()
     }
 
-    // @Post('/pages')
-    // @HttpCode(201)
-    // createPage(
-    //     @Body() body: Page
-    // ): Page {
-    //     console.log(`Incoming POST body param:`, body)
-    //     return body
-    // }
-
+    @Authorized()
     @Post('/pages')
     @HttpCode(201)
     createPage(
@@ -72,3 +39,36 @@ export default class PageController {
     }
 }
 
+
+// import pagesById, { Page } from './data'
+// type PageList = { pages: Page[] }
+
+    // @Get('/pages/:id')
+    // getPage(
+    //     @Param('id') id: number
+    // ): Page {
+    //     return pagesById[id]
+    // }
+
+    // @Get('/pages/')
+    // allPages(): PageList {
+    //     return { pages: Object.values(Page.findOne) }
+    // }
+
+    // @Put('/pages/:id')
+    // updatePage(
+    //     @Param('id') id: number,
+    //     @Body() body: Partial<Page>
+    // ): Page {
+    //     console.log(`Incoming PUT body param:`, body)
+    //     return Page.findOne[id]
+    // }
+
+     // @Post('/pages')
+    // @HttpCode(201)
+    // createPage(
+    //     @Body() body: Page
+    // ): Page {
+    //     console.log(`Incoming POST body param:`, body)
+    //     return body
+    // }
