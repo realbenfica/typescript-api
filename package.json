@@ -5,7 +5,7 @@
   "main": "target/index.js",
   "scripts": {
     "compile": "tsc",
-    "start": "node .",
+    "start": "nodemon",
     "postinstall": "tsc -p ."
   },
   "keywords": [],
