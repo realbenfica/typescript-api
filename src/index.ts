@@ -1,11 +1,13 @@
 import 'reflect-metadata'
-import {createKoaServer} from 'routing-controllers'
+import { createKoaServer } from 'routing-controllers'
 import PageController from './pages/controller'
+import UserController from './users/controller'
 import setupDb from './db'
 
 const app = createKoaServer({
   controllers: [
-    PageController
+    PageController,
+    UserController
   ]
 })
 
